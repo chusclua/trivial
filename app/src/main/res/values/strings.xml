@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Trivial</string>
+
+    <string name="new_question_button">New Question</string>
+    <string name="continue_button">Continue</string>
+
+    <string name="question_points_label">%d Points</string>
+
+    <string name="score_label">Your score is %d points</string>
+    <plurals name="game_finished_label">
+        <item quantity="one">You\'ve answered\n%d question correctly\nand your score is %d points.</item>
+        <item quantity="other">You\'ve answered\n%d questions correctly\nand your score is %d points.</item>
+    </plurals>
+    <string name="game_over_title">Game over :(</string>
+    <string name="new_record_title">"New Record, Congrats!!!"</string>
+
+</resources>

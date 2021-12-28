@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.chus.clua.trivial.ui.answers.AnswerResultWrapper.AnswerResult" />
+
+        <variable
+            name="viewModel"
+            type="com.chus.clua.trivial.ui.answers.AnswersViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/base_fragment_background"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_points"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/question_points_label(viewModel.questionUi.score)}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@id/tv_timer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5 points" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_timer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_points"
+            app:layout_constraintTop_toTopOf="parent"
+            app:time_text="@{viewModel.time}"
+            tools:text="18''" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/c_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_points">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:textColor="@color/purple_500"
+                android:textSize="24sp"
+                app:html_text="@{viewModel.questionUi.question}"
+                tools:text="Which boxer was banned for taking a bite out of Evander Holyfield's ear in 1997?" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_answer_first"
+            style="@style/MyCustomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="2dp"
+            android:onClick="@{() -> viewModel.validate(btnAnswerFirst.tag, viewModel.questionUi)}"
+            android:tag="@{viewModel.questionUi.answers[0]}"
+            app:html_text="@{viewModel.questionUi.answers[0]}"
+            app:is_answer_correct="@{viewModel.answerResult}"
+            app:layout_constraintBottom_toTopOf="@id/btn_answer_third"
+            app:layout_constraintEnd_toStartOf="@id/btn_answer_second"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Roy Jones Jr." />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_answer_second"
+            style="@style/MyCustomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="2dp"
+            android:onClick="@{() -> viewModel.validate(btnAnswerSecond.tag, viewModel.questionUi)}"
+            android:tag="@{viewModel.questionUi.answers[1]}"
+            app:html_text="@{viewModel.questionUi.answers[1]}"
+            app:is_answer_correct="@{viewModel.answerResult}"
+            app:layout_constraintBottom_toTopOf="@id/btn_answer_fourth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_answer_first"
+            tools:backgroundTint="@color/teal_200"
+            tools:text="Mike Tyson"
+            tools:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_answer_third"
+            style="@style/MyCustomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:onClick="@{() -> viewModel.validate(btnAnswerThird.tag, viewModel.questionUi)}"
+            android:tag="@{viewModel.questionUi.answers[2]}"
+            app:html_text="@{viewModel.questionUi.answers[2]}"
+            app:is_answer_correct="@{viewModel.answerResult}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_answer_fourth"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Evander Holyfield" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_answer_fourth"
+            style="@style/MyCustomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:onClick="@{() -> viewModel.validate(btnAnswerFourth.tag, viewModel.questionUi)}"
+            android:tag="@{viewModel.questionUi.answers[3]}"
+            app:html_text="@{viewModel.questionUi.answers[3]}"
+            app:is_answer_correct="@{viewModel.answerResult}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_answer_third"
+            tools:text="Lennox Lewis" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_well_done"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="16dp"
+            android:scaleType="centerInside"
+            android:visibility="@{viewModel.answerResult.result == AnswerResult.OK ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/welldone" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_try_again"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="16dp"
+            android:scaleType="centerInside"
+            android:visibility="@{viewModel.answerResult.result == AnswerResult.KO ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/tryagain" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
